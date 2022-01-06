@@ -5,7 +5,7 @@ import json
 
 ua = UserAgent()
 
-def collect_data(weapont_type, minPrice):
+def collect_data(weapont_type=2, minPrice=2000):
     # response = requests.get(
     #     url='https://inventories.cs.money/5.0/load_bots_inventory/730?buyBonus=40&isStore=true&limit=60&maxPrice=10000&minPrice=1&offset=0&type=2&withStack=true',
     #     headers={'user-agent': f'{ua.random}'}
