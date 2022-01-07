@@ -35,7 +35,9 @@ def collect_data(weapont_type=2, minPrice=2000):
             #получаем данные
             data = response.json()
             items = data.get('items')
-            
+            error = data.get('error')
+            # if error == 2:
+            #     print('К сожалению, ничего не найдено. Попробуйте позже!')
             #забираем позиции, которые удовлетворяют требования
             for i in items:
                 if i.get('overprice') is not None and i.get('overprice') < -10:
@@ -68,6 +70,21 @@ def collect_data(weapont_type=2, minPrice=2000):
         json.dump(result, file, indent=4, ensure_ascii=False) 
 
     print(len(result))                   
+
+def checking_error(weapont_type=2, minPrice=2000):
+
+            url = f'https://inventories.cs.money/5.0/load_bots_inventory/730?buyBonus=40&hasTradeLock=false&isStore=true&limit=60&maxPrice=10000&minPrice={minPrice}&offset=0&quality=fn&type={weapont_type}&withStack=true'
+            # отправляем запрос
+            response = requests.get(
+            url=url,
+            headers={'user-agent': f'{ua.random}'}
+            )
+
+            #получаем данные
+            data = response.json()
+            error = data.get('error')
+            if error == 2:
+                return 2
 
 def main():
     collect_data()

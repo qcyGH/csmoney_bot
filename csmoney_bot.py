@@ -1,7 +1,7 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher.filters import Text
 from aiogram.utils.markdown import hbold, hlink
-from main import collect_data
+from main import checking_error, collect_data
 from bot_token import *
 import time
 import json
@@ -22,177 +22,217 @@ async def start(message: types.Message):
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=2, minPrice=2000)
+    checking_error(weapont_type=2, minPrice=2000)
+    if checking_error(weapont_type=2, minPrice=2000) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=2, minPrice=2000)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Перчатки 🥊'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=13, minPrice=1200)
+    checking_error(weapont_type=13, minPrice=1200)
+    if checking_error(weapont_type=13, minPrice=1200) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=13, minPrice=1200)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Пистолеты 🔫'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=5, minPrice=500)
+    checking_error(weapont_type=5, minPrice=500)
+    if checking_error(weapont_type=5, minPrice=500) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=5, minPrice=500)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Пистолеты-пулемёты 🔫'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=6, minPrice=100)
+    checking_error(weapont_type=6, minPrice=100)
+    if checking_error(weapont_type=6, minPrice=100) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=6, minPrice=100)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Штурмовые винтовки 🔫'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=3, minPrice=2000)
+    checking_error(weapont_type=3, minPrice=2000)
+    if checking_error(weapont_type=3, minPrice=2000) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=3, minPrice=2000)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')                      
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Снайперские винтовки 💥'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=4, minPrice=2000)
+    checking_error(weapont_type=4, minPrice=2000)
+    if checking_error(weapont_type=4, minPrice=2000) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=4, minPrice=2000)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Дробовики 💥'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=7, minPrice=50)
+    checking_error(weapont_type=7, minPrice=50)
+    if checking_error(weapont_type=7, minPrice=50) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=7, minPrice=50)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')
 
 @dp.message_handler(Text(equals='Пулемёты 🔫'))
 async def get_discount_knives(message: types.Message):
     await message.answer('Подождите немного. Провожу анализ...')
 
-    collect_data(weapont_type=8, minPrice=20)
+    checking_error(weapont_type=8, minPrice=10)
+    if checking_error(weapont_type=8, minPrice=10) == 2:
+        await message.answer('К сожалению, ничего не найдено. Попробуйте позже!')
+    else:    
+        collect_data(weapont_type=8, minPrice=10)
 
-    with open('result.json', encoding="utf-8") as file:
-        data = json.load(file)
 
-    count_result = 0
-    for index, item in enumerate(data):
-        card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
-               f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
-               f'{hbold("Цена: ")}${item.get("item_price")}'
-        count_result += 1
-        if index%20 == 0:
-            time.sleep(3)
+        with open('result.json', encoding="utf-8") as file:
+            data = json.load(file)
 
-        await message.answer(card) 
-    await message.answer(f'Найдено {count_result} позиций 🔥')
-    await message.answer('Удачных покупок 😉')                                  
+        count_result = 0
+        for index, item in enumerate(data):
+            card = f'{hlink(item.get("full_name"), item.get("3d"))}\n' \
+                f'{hbold("Скидка: ")}{item.get("overprice")}%\n' \
+                f'{hbold("Цена: ")}${item.get("item_price")}'
+            count_result += 1
+            if index%20 == 0:
+                time.sleep(3)
+
+            await message.answer(card) 
+        await message.answer(f'Найдено {count_result} позиций 🔥')
+        await message.answer('Удачных покупок 😉')                             
             
 
 def main():
