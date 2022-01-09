@@ -82,8 +82,14 @@ def checking_error(weapont_type=2, minPrice=2000):
 
             #получаем данные
             data = response.json()
+            items = data.get('items')
             error = data.get('error')
-            if error == 2:
+            count_items = 0
+            for i in items:
+                if i.get('overprice') is not None and i.get('overprice') < -10:
+                    count_items += 1
+
+            if error == 2 or count_items == 0:
                 return 2
 
 def main():
